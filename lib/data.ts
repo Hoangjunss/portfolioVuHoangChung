@@ -50,7 +50,7 @@ export const portfolioData = {
       position: "Backend Java Developer Intern",
       location: "Ho Chi Minh City",
       startDate: "May 2025",
-      endDate: "Dec 2025",
+      endDate: "Aug 2025",
       achievements: [
         "Developed 20+ REST APIs for e-commerce modules (order management, product CRUD, checkout flow) using Spring Boot, with built-in input validation and global exception handling.",
         "Integrated Redis caching for high-traffic endpoints, helping to reduce database load.",
