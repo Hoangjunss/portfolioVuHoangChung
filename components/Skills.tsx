@@ -3,51 +3,63 @@
 import { portfolioData } from "@/lib/data";
 import {
   SiSpringboot,
-  SiPostgresql,
-  SiDocker,
-  SiJunit5,
-  SiReact,
-  SiTailwindcss,
-  SiRedis,
-  SiMysql,
-  SiRedux,
-  SiBootstrap,
   SiSpringsecurity,
   SiJsonwebtokens,
+  SiJunit5,
+  SiReact,
+  SiRedux,
+  SiTailwindcss,
+  SiBootstrap,
+  SiMysql,
+  SiRedis,
+  SiDocker,
+  SiSwagger,
+  SiPostman,
+  SiApacheMaven,
 } from "react-icons/si";
-import { FaJava, FaGitAlt, FaJs, FaDatabase } from "react-icons/fa";
-import { TbBrandTypescript, TbBrandWebsocket } from "react-icons/tb";
+import { FaJava, FaGitAlt, FaJs, FaCode } from "react-icons/fa";
+import { TbBrandTypescript } from "react-icons/tb";
 import { GrMysql } from "react-icons/gr";
-import { BiLogoSpringBoot } from "react-icons/bi";
+import { BsChatDots } from "react-icons/bs"; // thay thế cho WebSocket
 import { useEffect } from "react";
 
 const skillIcons: Record<string, React.ReactNode> = {
+  // Languages
   "Java (Core)": <FaJava className="w-6 h-6 text-orange-600" />,
-  Java: <FaJava className="w-6 h-6 text-orange-600" />,
   SQL: <GrMysql className="w-6 h-6 text-blue-600" />,
   JavaScript: <FaJs className="w-6 h-6 text-yellow-500" />,
   TypeScript: <TbBrandTypescript className="w-6 h-6 text-blue-600" />,
-  "HTML/CSS": <FaJava className="w-6 h-6 text-orange-600" />, // fallback
+  "HTML/CSS": <FaCode className="w-6 h-6 text-orange-600" />,
+
+  // Backend
   "Spring Boot": <SiSpringboot className="w-6 h-6 text-green-600" />,
   "Spring MVC": <SiSpringboot className="w-6 h-6 text-green-600" />,
   "Spring Data JPA": <SiSpringboot className="w-6 h-6 text-green-600" />,
   "Spring Security": <SiSpringsecurity className="w-6 h-6 text-green-600" />,
   JWT: <SiJsonwebtokens className="w-6 h-6 text-purple-600" />,
-  WebSocket: <TbBrandWebsocket className="w-6 h-6 text-blue-500" />,
+  WebSocket: <BsChatDots className="w-6 h-6 text-blue-500" />,
   "JUnit 5": <SiJunit5 className="w-6 h-6 text-green-700" />,
-  Mockito: <SiJunit5 className="w-6 h-6 text-green-700" />, // tạm dùng chung
+  Mockito: <SiJunit5 className="w-6 h-6 text-green-700" />,
+
+  // Frontend
   ReactJS: <SiReact className="w-6 h-6 text-cyan-500" />,
   "Redux Toolkit": <SiRedux className="w-6 h-6 text-purple-600" />,
   "Tailwind CSS": <SiTailwindcss className="w-6 h-6 text-teal-500" />,
   Bootstrap: <SiBootstrap className="w-6 h-6 text-purple-600" />,
+
+  // Database & Caching
   MySQL: <SiMysql className="w-6 h-6 text-blue-500" />,
   Redis: <SiRedis className="w-6 h-6 text-red-600" />,
+
+  // Tools & DevOps
   Docker: <SiDocker className="w-6 h-6 text-blue-400" />,
   Git: <FaGitAlt className="w-6 h-6 text-orange-600" />,
-  Maven: <FaJava className="w-6 h-6 text-red-600" />,
-  Postman: <FaJava className="w-6 h-6 text-orange-600" />,
-  Swagger: <FaJava className="w-6 h-6 text-green-600" />,
+  Maven: <SiApacheMaven className="w-6 h-6 text-red-500" />,
+  Postman: <SiPostman className="w-6 h-6 text-orange-600" />,
+  Swagger: <SiSwagger className="w-6 h-6 text-green-600" />,
   "SVN awareness": <FaGitAlt className="w-6 h-6 text-blue-600" />,
+
+  // Architecture
   "SOLID Principles": <FaJava className="w-6 h-6 text-gray-600" />,
   "Design Patterns": <FaJava className="w-6 h-6 text-gray-600" />,
   "Microservices Architecture": <FaJava className="w-6 h-6 text-gray-600" />,
@@ -81,14 +93,18 @@ export default function Skills() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {portfolioData.skills.map((skillGroup, index) => (
             <div key={index} className="glass-card p-6 reveal">
-              <h3 className="text-lg font-semibold text-primary mb-4">{skillGroup.category}</h3>
+              <h3 className="text-lg font-semibold text-primary mb-4">
+                {skillGroup.category}
+              </h3>
               <div className="flex flex-wrap gap-3">
                 {skillGroup.items.map((skill) => (
                   <div
                     key={skill}
                     className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/20 dark:bg-white/5 border border-white/30 dark:border-white/10 hover:bg-white/30 dark:hover:bg-white/20 transition-all hover:scale-105"
                   >
-                    {skillIcons[skill] || <div className="w-6 h-6 rounded-full bg-primary/30" />}
+                    {skillIcons[skill] || (
+                      <div className="w-6 h-6 rounded-full bg-primary/30" />
+                    )}
                     <span className="text-sm font-medium">{skill}</span>
                   </div>
                 ))}
