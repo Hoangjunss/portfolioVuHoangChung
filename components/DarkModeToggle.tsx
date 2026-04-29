@@ -40,15 +40,11 @@ export default function DarkModeToggle() {
 
   return (
     <button
-      onClick={toggleDarkMode}
-      className="fixed top-4 right-4 z-50 glass-effect p-3 rounded-full hover:bg-white/20 dark:hover:bg-white/15 transition-all"
-      aria-label="Toggle dark mode"
-    >
-      {isDark ? (
-        <FaSun className="w-5 h-5 text-amber-500" />
-      ) : (
-        <FaMoon className="w-5 h-5 text-slate-700" />
-      )}
-    </button>
+  onClick={toggleDarkMode}
+  className="fixed top-4 right-4 z-50 glass-card p-3 rounded-full hover:scale-110 transition-transform"
+  aria-label="Toggle dark mode"
+>
+  {isDark ? <FaSun className="w-5 h-5 text-amber-500" /> : <FaMoon className="w-5 h-5 text-slate-700" />}
+</button>
   );
 }

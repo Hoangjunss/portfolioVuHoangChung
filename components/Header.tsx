@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import DarkModeToggle from "./DarkModeToggle";
 
@@ -14,11 +14,24 @@ const navLinks = [
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-white/10 dark:bg-white/5 border-b border-white/20 dark:border-white/10">
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "backdrop-blur-xl bg-white/70 dark:bg-gray-900/70 border-b border-white/20 shadow-md"
+          : "bg-transparent"
+      }`}
+    >
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-        <a href="#" className="text-xl font-bold gradient-text">
+        <a href="#" className="text-2xl font-bold animated-gradient-text">
           VH
         </a>
 
@@ -28,7 +41,7 @@ export default function Header() {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+              className="text-sm font-medium text-foreground hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full"
             >
               {link.label}
             </a>
@@ -41,27 +54,21 @@ export default function Header() {
           <DarkModeToggle />
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2"
-            aria-label="Toggle menu"
+            className="p-2 rounded-full glass-card"
           >
-            {mobileMenuOpen ? (
-              <FaTimes className="w-5 h-5" />
-            ) : (
-              <FaBars className="w-5 h-5" />
-            )}
+            {mobileMenuOpen ? <FaTimes className="w-5 h-5" /> : <FaBars className="w-5 h-5" />}
           </button>
         </div>
       </nav>
 
-      {/* Mobile Navigation */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-background/95 backdrop-blur-xl border-t border-border">
-          <div className="container mx-auto px-4 py-4 flex flex-col gap-4">
+        <div className="md:hidden backdrop-blur-xl bg-white/90 dark:bg-gray-900/90 border-t border-white/20">
+          <div className="container mx-auto px-4 py-6 flex flex-col gap-4">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium text-foreground hover:text-primary transition-colors py-2"
+                className="text-lg font-medium text-foreground hover:text-primary transition-colors py-2"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {link.label}
