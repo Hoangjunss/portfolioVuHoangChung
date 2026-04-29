@@ -3,96 +3,45 @@
 import { portfolioData } from "@/lib/data";
 import {
   SiSpringboot,
-  SiSpringsecurity,
-  SiJsonwebtokens,
-  SiJunit5,
-  SiReact,
-  SiRedux,
-  SiTailwindcss,
-  SiBootstrap,
-  SiMysql,
-  SiRedis,
+  SiPostgresql,
   SiDocker,
-  SiSwagger,
-  SiPostman,
-  SiApacheMaven,
+  SiJunit5,
 } from "react-icons/si";
-import { FaJava, FaGitAlt, FaJs, FaCode } from "react-icons/fa";
-import { TbBrandTypescript } from "react-icons/tb";
-import { GrMysql } from "react-icons/gr";
-import { BsChatDots } from "react-icons/bs"; // thay thế cho WebSocket
-import { useEffect } from "react";
 
 const skillIcons: Record<string, React.ReactNode> = {
-  // Languages
-  "Java (Core)": <FaJava className="w-6 h-6 text-orange-600" />,
-  SQL: <GrMysql className="w-6 h-6 text-blue-600" />,
-  JavaScript: <FaJs className="w-6 h-6 text-yellow-500" />,
-  TypeScript: <TbBrandTypescript className="w-6 h-6 text-blue-600" />,
-  "HTML/CSS": <FaCode className="w-6 h-6 text-orange-600" />,
-
-  // Backend
-  "Spring Boot": <SiSpringboot className="w-6 h-6 text-green-600" />,
-  "Spring MVC": <SiSpringboot className="w-6 h-6 text-green-600" />,
-  "Spring Data JPA": <SiSpringboot className="w-6 h-6 text-green-600" />,
-  "Spring Security": <SiSpringsecurity className="w-6 h-6 text-green-600" />,
-  JWT: <SiJsonwebtokens className="w-6 h-6 text-purple-600" />,
-  WebSocket: <BsChatDots className="w-6 h-6 text-blue-500" />,
-  "JUnit 5": <SiJunit5 className="w-6 h-6 text-green-700" />,
-  Mockito: <SiJunit5 className="w-6 h-6 text-green-700" />,
-
-  // Frontend
-  ReactJS: <SiReact className="w-6 h-6 text-cyan-500" />,
-  "Redux Toolkit": <SiRedux className="w-6 h-6 text-purple-600" />,
-  "Tailwind CSS": <SiTailwindcss className="w-6 h-6 text-teal-500" />,
-  Bootstrap: <SiBootstrap className="w-6 h-6 text-purple-600" />,
-
-  // Database & Caching
-  MySQL: <SiMysql className="w-6 h-6 text-blue-500" />,
-  Redis: <SiRedis className="w-6 h-6 text-red-600" />,
-
-  // Tools & DevOps
-  Docker: <SiDocker className="w-6 h-6 text-blue-400" />,
-  Git: <FaGitAlt className="w-6 h-6 text-orange-600" />,
-  Maven: <SiApacheMaven className="w-6 h-6 text-red-500" />,
-  Postman: <SiPostman className="w-6 h-6 text-orange-600" />,
-  Swagger: <SiSwagger className="w-6 h-6 text-green-600" />,
-  "SVN awareness": <FaGitAlt className="w-6 h-6 text-blue-600" />,
-
-  // Architecture
-  "SOLID Principles": <FaJava className="w-6 h-6 text-gray-600" />,
-  "Design Patterns": <FaJava className="w-6 h-6 text-gray-600" />,
-  "Microservices Architecture": <FaJava className="w-6 h-6 text-gray-600" />,
+  Java: null,
+  "Spring Boot": <SiSpringboot className="w-6 h-6" />,
+  "Spring MVC": <SiSpringboot className="w-6 h-6" />,
+  "Spring Data JPA": <SiSpringboot className="w-6 h-6" />,
+  "Spring Security": <SiSpringboot className="w-6 h-6" />,
+  PostgreSQL: <SiPostgresql className="w-6 h-6" />,
+  MySQL: null,
+  Redis: null,
+  Docker: <SiDocker className="w-6 h-6" />,
+  Git: null,
+  "JUnit 5": <SiJunit5 className="w-6 h-6" />,
+  Maven: null,
+  Postman: null,
 };
 
 export default function Skills() {
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) entry.target.classList.add("active");
-        });
-      },
-      { threshold: 0.1 }
-    );
-    const reveals = document.querySelectorAll(".reveal");
-    reveals.forEach((el) => observer.observe(el));
-    return () => reveals.forEach((el) => observer.unobserve(el));
-  }, []);
-
   return (
     <section id="skills" className="section-container">
       <div className="max-w-5xl mx-auto">
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 reveal animated-gradient-text">
-          Technical Skills
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 animate-fade-in-up">
+          <span className="gradient-text">Technical Skills</span>
         </h2>
-        <p className="text-muted-foreground mb-12 reveal">
+        <p className="text-muted-foreground mb-12 animate-fade-in-up [animation-delay:0.1s]">
           Technologies and tools I work with to build scalable backend systems
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {portfolioData.skills.map((skillGroup, index) => (
-            <div key={index} className="glass-card p-6 reveal">
+            <div
+              key={index}
+              className="backdrop-blur-xl bg-white/10 dark:bg-white/5 border border-white/20 dark:border-white/10 rounded-2xl p-6 transition-all duration-300 hover:bg-white/15 dark:hover:bg-white/10 hover:border-white/30 dark:hover:border-white/20 animate-fade-in-up dark:p-8"
+              style={{ animationDelay: `${0.1 * (index + 2)}s` }}
+            >
               <h3 className="text-lg font-semibold text-primary mb-4">
                 {skillGroup.category}
               </h3>
@@ -100,9 +49,11 @@ export default function Skills() {
                 {skillGroup.items.map((skill) => (
                   <div
                     key={skill}
-                    className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/20 dark:bg-white/5 border border-white/30 dark:border-white/10 hover:bg-white/30 dark:hover:bg-white/20 transition-all hover:scale-105"
+                    className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/10 dark:bg-white/5 border border-white/20 dark:border-white/10 hover:bg-white/20 dark:hover:bg-white/10 transition-all"
                   >
-                    {skillIcons[skill] || (
+                    {skillIcons[skill] ? (
+                      skillIcons[skill]
+                    ) : (
                       <div className="w-6 h-6 rounded-full bg-primary/30" />
                     )}
                     <span className="text-sm font-medium">{skill}</span>
